@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose")
 
 const restaurant = new mongoose.Schema({
   restaurantDescription: { type: String, required: true },
@@ -12,4 +12,4 @@ const restaurant = new mongoose.Schema({
 
 const restaurantModel = new mongoose.model("restaurants", restaurant);
 
-export default restaurantModel;
+module.exports = restaurantModel;
