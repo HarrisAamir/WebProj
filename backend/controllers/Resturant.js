@@ -50,11 +50,11 @@ let deleteRestaurant = async (req, res) => {
                 res.status(500).json({ error: 'An error occurred while updating the restaurant' });
               });
           };
-        let getAllRestaurants = async (req, res) => {
-            restaurantModel.find().then(res=>{res.json(restaurants)}).catch(error =>{
-              res.status(500).json({ error: 'An error occurred while fetching the restaurants' })});
-            }          
-          
+    let getAllRestaurants = async (req, res) => {
+            restaurantModel.find().then(restaurants=>{res.json(restaurants)}).catch((error) =>{
+            res.status(500).json({ error: 'An error occurred while fetching the restaurants' });
+          })}
+   
 module.exports = {
    createRestaurant,
    deleteRestaurant,
