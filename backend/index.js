@@ -13,8 +13,8 @@ require("dotenv").config();
 const bodyParser = require('body-parser')
 const app = express()
 const port = 3001
-
-
+const cors = require('cors');
+app.use(cors());
 app.use(bodyParser.json())
 // Adding a Router
 app.use('/users', router);
@@ -42,5 +42,6 @@ mongoose.connect(process.env.MONGODB_URI).then((err) => {
     console.log(err)
 })
 const AdminRouter = require("./routes/adminRoute");
+const RiderRouter = require("./routes/riderRoute");
 app.use("/admin",AdminRouter);
-
+app.use("/rider",RiderRouter);

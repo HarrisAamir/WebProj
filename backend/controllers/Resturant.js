@@ -2,13 +2,13 @@ const restaurantModel = require("../models/restaurants");
 
 let createRestaurant =async (req, res) => {
     const rest={
-        "restaurantdescription": req.body.restaurantdescription,
-        "restaurantname": req.body.restaurantname,
-        "restaurantpassword": req.body.restaurantpassword,
-        "restaurantstatus": req.body.restaurantstatus,
-        "restauranttype": req.body.restauranttype,
-        "restaurantusername":req.body.restaurantusername,
-        "restaurantlogo": req.body.restaurantlogo
+        "restaurantDescription": req.body.restaurantDescription,
+        "restaurantName": req.body.restaurantName,
+        "restaurantPassword": req.body.restaurantPassword,
+        "restaurantStatus": req.body.restaurantStatus,
+        "restaurantType": req.body.restaurantType,
+        "restaurantuserName":req.body.restaurantuserName,
+        "restaurantLogo": req.body.restaurantLogo
     }
     
     const restaurant = new restaurantModel(rest);
@@ -29,13 +29,13 @@ let deleteRestaurant = async (req, res) => {
     let editRestaurant = async (req, res) => {
             const restaurantID = req.body._id;
             const updatedData={
-                "restaurantdescription": req.body.restaurantdescription,
-                "restaurantname": req.body.restaurantname,
-                "restaurantpassword": req.body.restaurantpassword,
-                "restaurantstatus": req.body.restaurantstatus,
-                "restauranttype": req.body.restauranttype,
-                "restaurantusername":req.body.restaurantusername,
-                "restaurantlogo": req.body.restaurantlogo
+              "restaurantDescription": req.body.restaurantDescription,
+              "restaurantName": req.body.restaurantName,
+              "restaurantPassword": req.body.restaurantPassword,
+              "restaurantStatus": req.body.restaurantStatus,
+              "restaurantType": req.body.restaurantType,
+              "restaurantuserName":req.body.restaurantuserName,
+              "restaurantLogo": req.body.restaurantLogo
             }
           
             restaurantModel.findByIdAndUpdate(restaurantID, updatedData, { new: true })

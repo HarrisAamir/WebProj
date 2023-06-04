@@ -13,13 +13,12 @@ const AdminRouter = require("express").Router();
 
 AdminRouter.get("/viewAllStores",checkIfAdmin,viewAllStores )
 AdminRouter.post("/addNewStore",checkIfAdmin,createStore )
-AdminRouter.put("/editStore",checkIfAdmin,editStore )
+AdminRouter.post("/editStore",checkIfAdmin,editStore )
 AdminRouter.delete("/deleteStore:id",checkIfAdmin,deleteStore )
 AdminRouter.post("/addNewResturant",checkIfAdmin,createRestaurant )
-AdminRouter.delete("/deleteRestaurant:id",checkIfAdmin,deleteRestaurant )
+AdminRouter.delete("/deleteRestaurant/:id",checkIfAdmin,deleteRestaurant )
 AdminRouter.post("/editRestaurant",checkIfAdmin,editRestaurant )
-AdminRouter.get("/getAllRestaurants",checkIfAdmin,getAllRestaurants)
-AdminRouter.get("/getAllRestaurants",checkIfAdmin,getAllRestaurants)
+AdminRouter.get("/getAllRestaurants",getAllRestaurants)
 const login=(req,res)=>{
         if (req.body.username=="Admin" && req.body.password=="Admin"){
           
