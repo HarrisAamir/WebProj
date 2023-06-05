@@ -54,9 +54,9 @@ const Restaurant = (props) => {
       <div className="row">
         {restaurants.map((resturant) => {
           return (
-            <div className="col-md-4 p-3 mt-2" key={resturant._id}>
+            <div className="col-md-4 p-3 mt-2 " key={resturant._id}>
              {
-                <div className='bg-light p-3 text-center'>
+                <div className='bg-light p-3 text-center rounded'>
                 <h3>{resturant.restaurantName}</h3>
                 <img src={resturant.restaurantLogo} className="img-fluid" style={{ height: '200px', width: '200px' }} alt="ioeur"/>
                 <p>{resturant.restaurantDescription}</p>

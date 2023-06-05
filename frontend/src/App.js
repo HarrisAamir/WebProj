@@ -5,6 +5,7 @@ import Topbar from './components/topbar';
 import Navbar from './components/navbar';
 // import 'bootstrap/dist/css/bootstrap.min.css'; // Import the Bootstrap CSS
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import ChatComponent from './components/Chat';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/login" element={<Login/>} />
         <Route path="/" element={<Login/>} />
         <Route path="/Admin" element={<AdminDashboard/>} />
+        <Route path="/chat" element={<ChatComponent/>} />
       </Routes>
     </Router>
    </>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const Customers = () => {
-  const [data, setData] = useState([]);
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
     fetchData();
@@ -14,16 +14,44 @@ const Customers = () => {
         token: localStorage.getItem("token"),
         "Content-Type": "application/json",
       }}); 
-      setData(response.data);
+      setUsers(response.data);
       console.log(response.data)
     } catch (error) {
       console.error('Error fetching data:', error);
     }
   };
-
+  const filter=(val)=>{
+    if (val==="")
+        fetchData()
+    let userarr= users.filter((user) => {
+        // Modify the property name below to match the property in your array of objects
+        return user.name.includes(val);
+  })
+  setUsers(userarr)
+}
   return (
     <div>
-      <h2 className='text-center'>Registerd Customers</h2>
+        <div className="container">
+      <div className="row">
+        <div className="col"></div> {/* Empty column */}
+        <div className="col-6">
+          <h2 className="text-center">Registered Customers</h2>
+        </div>
+
+        <div className="col-3">
+          <div>
+            <img src="https://cdn.icon-icons.com/icons2/3392/PNG/512/small_search_icon_213735.png" width={"40px"} className='d-inline '></img>
+          <input
+            type="text"
+            className=" d-inline form-control"
+            style={{width:"200px"}}
+            placeholder='Search Here...'
+            onChange={(e) => filter(e.target.value)}
+          />
+          </div>
+        </div>
+      </div>
+    </div>
       <table className="text-center table mx-4  text-dark table-bordered ">
         <thead>
           <tr>
@@ -36,7 +64,7 @@ const Customers = () => {
           </tr>
         </thead>
         <tbody>
-          {data.map((user) => (
+          {users.map((user) => (
             <tr key={user._id}>
               <td>{user.username}</td>
               <td>{user.password}</td>

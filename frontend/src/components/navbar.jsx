@@ -40,11 +40,11 @@ const navbar = () => {
                             <a href="/contact" className="nav-item nav-link">
                                 Contact
                             </a>
-                            <a href="gallery.html" className="nav-item nav-link">
-                                Gallery
+                            <a href="/Login" className="nav-item nav-link">
+                                Login
                             </a>
-                            <a href="contact.html" className="nav-item nav-link">
-                                Account
+                            <a href="/chat" className="nav-item nav-link">
+                                Chat
                             </a>
                         </div>
                     </div>

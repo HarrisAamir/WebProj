@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import Card from 'react-bootstrap/Card';
+
 import axios from 'axios';
 
 const Login = () => {
@@ -30,7 +32,7 @@ const Login = () => {
 
       </div>
       <div className="col-sm m-5">
-        
+      <Card className='p-4 bg-light'>
       <h1>Login Admin</h1>
       <Form onSubmit={handleLogin}>
         <Form.Group controlId="formUsername">
@@ -56,6 +58,7 @@ const Login = () => {
           Login 
         </Button>
       </Form>
+      </Card>
             </div>
     </div>
   </div>
