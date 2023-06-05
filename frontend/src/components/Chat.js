@@ -14,7 +14,7 @@ const ChatComponent= (props) => {
         body: JSON.stringify(inputText),
     }
 );
-console.log("Hellooo")
+
 
 const result = await response.json();
 await console.log(result)

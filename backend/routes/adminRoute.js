@@ -8,6 +8,7 @@ const {deleteRestaurant} = require("../controllers/Resturant")
 const {editRestaurant} = require("../controllers/Resturant")
 const {getAllRestaurants} = require("../controllers/Resturant")
 const {getAllCustomers} = require("../controllers/User")
+const {getAllOrders} = require("../controllers/User")
 const {checkIfAdmin} = require("../util")
 
 const jwt = require('jsonwebtoken');
@@ -22,6 +23,7 @@ AdminRouter.delete("/deleteRestaurant/:id",checkIfAdmin,deleteRestaurant )
 AdminRouter.post("/editRestaurant",checkIfAdmin,editRestaurant )
 AdminRouter.get("/getAllRestaurants",getAllRestaurants)
 AdminRouter.get("/getAllCustomers",checkIfAdmin,getAllCustomers)
+AdminRouter.get("/getAllOrders",checkIfAdmin,getAllOrders)
 const login=(req,res)=>{
         if (req.body.username=="Admin" && req.body.password=="Admin"){
           

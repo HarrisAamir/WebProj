@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Restaurant from './Resturant';
 import Store from './Store';
 import Customers from './Customers';
+import Orders from './Orders';
 // import RegisterRestaurant from './RegisterRestaurant';
 // import ManageCustomers from './ManageCustomers';
 const AdminDashboard = () => {
@@ -12,7 +13,7 @@ const AdminDashboard = () => {
   const [manageResturants, setManageResturants]= useState(true)
   const [manageCustomers, setManageCustomers]= useState(false)
   const [manageStores, setManageStores]= useState(false)
-  const [manageRiders, setManageRiders]= useState(false)
+  const [manageOrders, setManageOrders]= useState(false)
   const token = localStorage.getItem('token');
   token==null?checkLogined=false:checkLogined=true;
   const navHandler=(opt)=>{
@@ -21,25 +22,25 @@ const AdminDashboard = () => {
         setManageResturants(true)
         setManageCustomers(false)
         setManageStores(false)
-        setManageRiders(false)
+        setManageOrders(false)
         break;
       case 2:
         setManageResturants(false)
         setManageCustomers(true)
         setManageStores(false)
-        setManageRiders(false)
+        setManageOrders(false)
         break;
       case 3:
           setManageResturants(false)
           setManageCustomers(false)
           setManageStores(true)
-          setManageRiders(false)
+          setManageOrders(false)
           break;
       case 4:
          setManageResturants(false)
          setManageCustomers(false)
          setManageStores(false)
-         setManageRiders(true)
+         setManageOrders(true)
          break;
     
       default:
@@ -69,7 +70,7 @@ const AdminDashboard = () => {
            <Link className='text-dark'> Manage Groccery Stores </Link>
         </li>
         <li className='list-inline-item' onClick={()=>{navHandler(4)}} >
-           <Link className='text-dark'> Manage Riders </Link>
+           <Link className='text-dark'> Manage Orders </Link>
         </li>
           </ul>
         </div>
@@ -81,7 +82,7 @@ const AdminDashboard = () => {
         {manageResturants?<div>{<Restaurant/>}</div>:<></>}
         {manageCustomers?<div>{<Customers/>}</div>:<></>}
         {manageStores?<div>{<Store/>}</div>:<></>}
-        {manageRiders?<>rider</>:<></>}
+        {manageOrders?<>{<Orders/>}</>:<></>}
       </div>
       </div>
       )
