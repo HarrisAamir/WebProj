@@ -16,13 +16,21 @@ const Login = () => {
             alert('Login successful');
             localStorage.setItem('token', res.data);
             console.log('Response:', res.data);
-            navigate('/home');
+            navigate('/Admin');
         }).catch(err=>{
             alert("Invalid Credentails")
       })
     }
   return (
-    <div className="container">
+    <div>
+
+    <div className="row align-items-center">
+      <div className="col-sm">
+      <img src="https://i.pinimg.com/originals/94/09/7e/94097e458fbb22184941be57aaab2c8f.png" width={"100%"}></img>
+
+      </div>
+      <div className="col-sm m-5">
+        
       <h1>Login Admin</h1>
       <Form onSubmit={handleLogin}>
         <Form.Group controlId="formUsername">
@@ -48,7 +56,11 @@ const Login = () => {
           Login 
         </Button>
       </Form>
+            </div>
     </div>
+  </div>
+
+     
   );
 };
 

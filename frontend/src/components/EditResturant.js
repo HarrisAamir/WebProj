@@ -4,6 +4,7 @@ import { editContext } from './Resturant';
 import axios from 'axios';
 const EditResturant = ({ restaurant }) => {
   const [formData, setFormData] = useState({
+    _id:restaurant._id,
     restaurantName: restaurant.restaurantName,
     restaurantDescription: restaurant.restaurantDescription,
     restaurantUsername: restaurant.restaurantuserName,
@@ -17,17 +18,18 @@ const EditResturant = ({ restaurant }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
   const { edit, closeEdit } = useContext(editContext);
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    axios.post("http://localhost/admin/editRestaurant",formData,{headers:{
+    axios.post("http://localhost:3001/admin/editRestaurant",formData,{headers:{
         token:localStorage.getItem("token"),
         'Content-Type': 'application/json'
-    }}).then(res=>{
+    }}).then(async(res)=>{
         alert("Information Sucessfully editied")
-    }).catch(err=>{
-        alert("Error: "+err)
+        await closeEdit()
+    }).catch(async err=>{
+       await alert("Error: "+err)
     })
-    closeEdit()
+    
   };
   const close=()=>{
     closeEdit()
@@ -35,7 +37,7 @@ const EditResturant = ({ restaurant }) => {
   return (
     <div>
       <h2>Edit Restaurant</h2>
-      <form onSubmit={handleSubmit}>
+      <form>
         <div className="mb-3">
           <label htmlFor="restaurantName" className="form-label">Restaurant Name</label>
           <input type="text" className="form-control" id="restaurantName" name="restaurantName" value={formData.restaurantName} onChange={handleChange} />
@@ -64,8 +66,8 @@ const EditResturant = ({ restaurant }) => {
           <label htmlFor="restaurantLogo" className="form-label">Restaurant Logo</label>
           <input type="text" className="form-control" id="restaurantLogo" name="restaurantLogo" value={formData.restaurantLogo} onChange={handleChange} />
         </div>
-        <button type="submit" className="btn btn-primary mx-2 mb-5">Save Changes</button>
-        <button className="btn btn-danger mx-2 mb-5">Back</button>
+        <button type="submit" className="btn btn-info mx-2 mb-5" onClick={handleSubmit}>Save Changes</button>
+        <button className="btn btn-danger mx-2 mb-5" onClick={close}>Back</button>
       </form>
     </div>
   );

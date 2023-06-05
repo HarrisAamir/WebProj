@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import Restaurant from './Resturant';
+import Store from './Store';
+import Customers from './Customers';
 // import RegisterRestaurant from './RegisterRestaurant';
 // import ManageCustomers from './ManageCustomers';
 const AdminDashboard = () => {
@@ -12,6 +14,7 @@ const AdminDashboard = () => {
   const [manageStores, setManageStores]= useState(false)
   const [manageRiders, setManageRiders]= useState(false)
   const token = localStorage.getItem('token');
+  token==null?checkLogined=false:checkLogined=true;
   const navHandler=(opt)=>{
     switch (opt) {
       case 1:
@@ -34,7 +37,7 @@ const AdminDashboard = () => {
           break;
       case 4:
          setManageResturants(false)
-         setManageCustomers(true)
+         setManageCustomers(false)
          setManageStores(false)
          setManageRiders(true)
          break;
@@ -43,35 +46,41 @@ const AdminDashboard = () => {
         break;
     }
   }
-  token==null?checkLogined=false:checkLogined=true;
+
   const navigate = useNavigate();
   const logout = ()=>{
     alert("you are not logedin ")
     navigate('/login') }
       return (
        <div>
-        <h1 className="m-3">Admin Dashboard</h1>
+        <h1 className="m-3 text-center">Admin Dashboard</h1>
         {checkLogined===false?logout():<></>}
-      <nav className="navbar navbar-expand-lg navbar-light bg-light mb-4">
-        <ul className="navbar-nav">
-        <li className="nav-link" onClick={()=>{navHandler(1)}} >
-           <Link className='nav-link'> Manage Restaurant </Link>
+        <div className="container bg-light rounded ">
+      <div className="row justify-content-center">
+        <div className="col">
+          <ul className="d-flex list-inline mt-3 justify-content-between">
+          <li className='list-inline-item' onClick={()=>{navHandler(1)}} >
+           <Link className='text-dark'> Manage Restaurant </Link>
         </li>
-        <li className="nav-link" onClick={()=>{navHandler(2)}} >
-           <Link className='nav-link'> Manage Customers </Link>
+        <li className="list-inline-item" onClick={()=>{navHandler(2)}} >
+           <Link className='text-dark'> Manage Customers </Link>
         </li>
-        <li className="nav-link" onClick={()=>{navHandler(3)}} >
-           <Link className='nav-link'> Manage Groccery Stores </Link>
+        <li className='list-inline-item' onClick={()=>{navHandler(3)}} >
+           <Link className='text-dark'> Manage Groccery Stores </Link>
         </li>
-        <li className="nav-link" onClick={()=>{navHandler(4)}} >
-           <Link className='nav-link'> Manage Riders </Link>
+        <li className='list-inline-item' onClick={()=>{navHandler(4)}} >
+           <Link className='text-dark'> Manage Riders </Link>
         </li>
-        </ul>
-      </nav>
+          </ul>
+        </div>
+      </div>
+    </div>
+      <div className=" bg-light mb-4">
+      </div>
       <div className="mt-4 content">
         {manageResturants?<div>{<Restaurant/>}</div>:<></>}
-        {manageCustomers?<>Customer</>:<></>}
-        {manageStores?<>store</>:<></>}
+        {manageCustomers?<div>{<Customers/>}</div>:<></>}
+        {manageStores?<div>{<Store/>}</div>:<></>}
         {manageRiders?<>rider</>:<></>}
       </div>
       </div>
