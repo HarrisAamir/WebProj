@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-
+import { useContext } from 'react';
+import { LoginContext } from '../App';
+import { useNavigate } from 'react-router-dom';
 const Customers = () => {
   const [users, setUsers] = useState([]);
-
+  const {logedIn}= useContext(LoginContext)
+  const navigate = useNavigate();
   useEffect(() => {
     fetchData();
   }, []);
@@ -31,6 +34,7 @@ const Customers = () => {
 }
   return (
     <div>
+     {logedIn===true?<></>:navigate("/login")} 
         <div className="container">
       <div className="row">
         <div className="col"></div> {/* Empty column */}

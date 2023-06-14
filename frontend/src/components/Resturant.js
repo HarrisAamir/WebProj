@@ -1,16 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { createContext } from 'react';
+import { useContext } from 'react';
 import axios from 'axios';
 import EditResturant from './EditResturant';
 import AddResturant from './AddResturant';
+import { useNavigate } from 'react-router-dom';
+import { LoginContext } from '../App';
 export const editContext = createContext();
 export const newContext = createContext();
+
+
 
 const Restaurant = (props) => {
   const [restaurants, setRestaurants] = useState([]);
   const [del, setDel] = useState("");
   const [edit, setEdit] = useState({"val":false, "resturant":restaurants[0]});
   const [newRes, setNewres]= useState(false)
+  const {logedIn}= useContext(LoginContext)
+  const navigate = useNavigate();
   const deleteHandler= (resturant)=>{
     const id=resturant._id
     console.log(id)
@@ -45,7 +52,9 @@ const Restaurant = (props) => {
     setNewres(false)
   }
   return (
+
     <editContext.Provider value={{edit,closeEdit}}>
+      {logedIn===true?<></>:navigate("/login")}
     <div className="container text-center">
     {newRes===true?<AddResturant close={closeNewRes}/>:<></>}
     {edit.val===true?<EditResturant restaurant={edit.resturant}/>:<>
@@ -56,7 +65,7 @@ const Restaurant = (props) => {
           return (
             <div className="col-md-4 p-3 mt-2 " key={resturant._id}>
              {
-                <div className='bg-light p-3 text-center rounded'>
+                <div className='bg-light p-3 text-center rounded shadow'>
                 <h3>{resturant.restaurantName}</h3>
                 <img src={resturant.restaurantLogo} className="img-fluid" style={{ height: '200px', width: '200px' }} alt="ioeur"/>
                 <p>{resturant.restaurantDescription}</p>

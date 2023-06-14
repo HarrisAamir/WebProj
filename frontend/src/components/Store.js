@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import EditStore from "./EditStore";
 import AddStore from "./AddStore";
+import { useNavigate } from "react-router-dom";
 const Store = () => {
   const [stores, setStores] = useState([]);
   const [del, setDel] = useState("");
   const [edit, setEdit] = useState({"val":false, "store":stores[0]});
   const [newStore, setNewStore]= useState(false)
+  const navigate= useNavigate();
   useEffect( () => {
     // Fetch restaurant data from the backend API
      axios.get('http://localhost:3001/admin/viewAllStores')
@@ -46,7 +48,8 @@ const Store = () => {
 
     {newStore===true?<AddStore close={setNewStore}/>:<></>}
     {edit.val===true?<EditStore store={edit.store} onClose={closeEdit}/>:<></> }
-    
+ 
+
     <h1 className="my-3">Store List</h1>
       <button className='btn btn-success' onClick={()=>{setNewStore(true)}}>Add New Store</button>
       <div className="row">

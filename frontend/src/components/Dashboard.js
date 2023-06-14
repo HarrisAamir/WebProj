@@ -1,6 +1,5 @@
 import React from 'react';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import Restaurant from './Resturant';
 import Store from './Store';
@@ -54,23 +53,26 @@ const AdminDashboard = () => {
     navigate('/login') }
       return (
        <div>
-        <h1 className="m-3 text-center">Admin Dashboard</h1>
+       
         {checkLogined===false?logout():<></>}
-        <div className="container bg-light rounded ">
+        <div className="container bg-light rounded mt-2 ">
+        <div className="row justify-content-center">
+        <h1 className="m-3 text-center">Admin Dashboard</h1>
+        </div>
       <div className="row justify-content-center">
         <div className="col">
-          <ul className="d-flex list-inline mt-3 justify-content-between">
-          <li className='list-inline-item' onClick={()=>{navHandler(1)}} >
-           <Link className='text-dark'> Manage Restaurant </Link>
+          <ul className="d-flex list-inline  justify-content-around">
+          <li className={manageResturants?'list-inline-item bg-primary p-2 rounded shadow':'list-inline-item bg-info p-2 rounded'} onClick={()=>{navHandler(1)}} >
+           <p className='text-light m-0'> Manage Restaurant </p>
         </li>
-        <li className="list-inline-item" onClick={()=>{navHandler(2)}} >
-           <Link className='text-dark'> Manage Customers </Link>
+        <li className={manageCustomers?'list-inline-item bg-primary p-2 rounded shadow':'list-inline-item bg-info p-2 rounded'} onClick={()=>{navHandler(2)}} >
+           <p className='text-light m-0'> Manage Customers </p>
         </li>
-        <li className='list-inline-item' onClick={()=>{navHandler(3)}} >
-           <Link className='text-dark'> Manage Groccery Stores </Link>
+        <li className={manageStores?'list-inline-item bg-primary p-2 rounded shadow':'list-inline-item bg-info p-2 rounded'} onClick={()=>{navHandler(3)}} >
+           <p className='text-light m-0'> Manage Groccery Stores </p>
         </li>
-        <li className='list-inline-item' onClick={()=>{navHandler(4)}} >
-           <Link className='text-dark'> Manage Orders </Link>
+        <li className= {manageOrders?'list-inline-item bg-primary p-2 rounded shadow':'list-inline-item bg-info p-2 rounded'} onClick={()=>{navHandler(4)}} >
+           <p className='text-light m-0'> Manage Orders </p>
         </li>
           </ul>
         </div>

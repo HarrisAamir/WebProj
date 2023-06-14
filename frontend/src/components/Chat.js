@@ -6,34 +6,45 @@ const ChatComponent= (props) => {
   const [messages, setMessages] = useState([]);
   const [inputText, setInputText] = useState('Hello');
 
-  const handleInputChange = async (e) => {
-    const response =  await fetch("https://api-inference.huggingface.co/models/gpt2",
-    {
-        headers: { Authorization: `Bearer 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` },
+//   const handleInputChange = async (e) => {
+//     const response =  await fetch("https://api-inference.huggingface.co/models/gpt2",
+//     {
+//         headers: { Authorization: `Bearer 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` },
+//         method: "POST",
+//         body: JSON.stringify(inputText),
+//     }
+// );
+// const result = await response.json();
+// await console.log(result)
+// await setMessages(result[0].generated_text)
+//     // setInputText(e.target.value);
+//   };
+
+
+  async function query(data) {
+    const response = await fetch(
+      "https://api-inference.huggingface.co/models/microsoft/DialoGPT-medium",
+      {
+        headers: { Authorization: "Bearer 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" },
         method: "POST",
-        body: JSON.stringify(inputText),
-    }
-);
+        body: JSON.stringify(data),
+      }
+    );
+    const result = await response.json();
+    return result;
+  }
+  const handleInputChange =()=>{
+  query({"inputs": {
+      "past_user_inputs": [""],
+      "generated_responses": [""],
+      "text": inputText
+    }}).then((response) => {
+    const result=JSON.stringify(response);
+    console.log(response.generated_text)
+    setMessages(response.generated_text)
 
-
-const result = await response.json();
-await console.log(result)
-await setMessages(result[0].generated_text)
-    // setInputText(e.target.value);
-  };
-
-  const handleSendMessage = () => {
-
-    if (inputText.trim() !== '') {
-      const newMessage = {
-        text: inputText,
-        sender: 'user',
-      };
-
-      setMessages([...messages, newMessage]);
-      setInputText();
-    }
-  };
+  });
+}
 
   return (
     <div>
@@ -54,7 +65,7 @@ await setMessages(result[0].generated_text)
       </div> */}
       <Card style={{ width: '600px' , margin:"auto", "margin-top":"90px"}} className='rounded'>
       <Card.Body>
-        <Card.Title><h2>Chat with GPT(2):</h2></Card.Title>
+        <Card.Title><h2>Chat with DialogGPT:</h2></Card.Title>
         <Card.Text>
         <p style={{ fontSize: '23px' }}>{messages}</p>
         </Card.Text>
